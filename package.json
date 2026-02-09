@@ -2,7 +2,7 @@
   "name": "ags-language-support",
   "displayName": "Diggy AGS",
   "description": "Language support for AGS (Association of Geotechnical and Geoenvironmental Specialists) data files",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "diggy",
   "author": {
     "name": "Diggy",
