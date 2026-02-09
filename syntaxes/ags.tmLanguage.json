@@ -1,0 +1,46 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "AGS",
+  "scopeName": "source.ags",
+  "patterns": [
+    {
+      "match": "^(\"GROUP\")(.*)$",
+      "captures": {
+        "1": { "name": "keyword.control.group.ags" },
+        "2": { "name": "entity.name.class.ags" }
+      }
+    },
+    {
+      "match": "^(\"HEADING\")(.*)$",
+      "captures": {
+        "1": { "name": "keyword.control.heading.ags" },
+        "2": { "name": "variable.other.heading.ags" }
+      }
+    },
+    {
+      "match": "^(\"UNIT\")(.*)$",
+      "captures": {
+        "1": { "name": "keyword.control.unit.ags" },
+        "2": { "name": "meta.unit.ags" }
+      }
+    },
+    {
+      "match": "^(\"TYPE\")(.*)$",
+      "captures": {
+        "1": { "name": "keyword.control.type.ags" },
+        "2": { "name": "meta.type.ags" }
+      }
+    },
+    {
+      "match": "^(\"DATA\")(.*)$",
+      "captures": {
+        "1": { "name": "keyword.control.data.ags" },
+        "2": { "name": "source.data.ags" }
+      }
+    },
+    {
+      "match": ".",
+      "name": "text.ags"
+    }
+  ]
+}

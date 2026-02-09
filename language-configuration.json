@@ -1,0 +1,13 @@
+{
+  "comments": {},
+  "brackets": [],
+  "autoClosingPairs": [],
+  "surroundingPairs": [],
+  "folding": {
+    "markers": {
+      "start": "^\"GROUP\"",
+      "end": "^(?=\\s*$|\"GROUP\")"
+    }
+  },
+  "wordPattern": "[A-Z_0-9]+"
+}

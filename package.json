@@ -1,0 +1,160 @@
+{
+  "name": "ags-language-support",
+  "displayName": "Diggy AGS",
+  "description": "Language support for AGS (Association of Geotechnical and Geoenvironmental Specialists) data files",
+  "version": "1.0.0",
+  "publisher": "diggy",
+  "author": {
+    "name": "Diggy",
+    "url": "https://diggy.tools"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sotech-studio/diggy-vscode-ags"
+  },
+  "homepage": "https://diggy.tools/tools/ags-vscode-extension",
+  "bugs": {
+    "url": "https://github.com/sotech-studio/diggy-vscode-ags/issues"
+  },
+  "icon": "images/icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "ags",
+    "geotechnical",
+    "borehole",
+    "ground investigation",
+    "site investigation"
+  ],
+  "activationEvents": [
+    "onLanguage:ags"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "ags",
+        "aliases": [
+          "AGS",
+          "Diggy AGS"
+        ],
+        "extensions": [
+          ".ags"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "ags",
+        "scopeName": "source.ags",
+        "path": "./syntaxes/ags.tmLanguage.json"
+      }
+    ],
+    "configuration": {
+      "title": "AGS",
+      "properties": {
+        "ags.hover.showDescriptions": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show group/heading descriptions on hover"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "ags.showSummary",
+        "title": "AGS: Show File Summary"
+      },
+      {
+        "command": "ags.goToGroup",
+        "title": "AGS: Go to Group"
+      },
+      {
+        "command": "ags.openDiggy",
+        "title": "AGS: More Tools on Diggy"
+      },
+      {
+        "command": "ags.toggleTableView",
+        "title": "AGS: Toggle Table View",
+        "icon": "$(table)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "ags.toggleTableView",
+        "key": "ctrl+shift+t",
+        "mac": "cmd+shift+t",
+        "when": "resourceLangId == ags"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "ags.toggleTableView",
+          "when": "resourceLangId == ags",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configurationDefaults": {
+      "[ags]": {
+        "editor.bracketPairColorization.enabled": false,
+        "editor.guides.bracketPairs": false,
+        "editor.matchBrackets": "never"
+      },
+      "editor.tokenColorCustomizations": {
+        "[*Dark*]": {
+          "textMateRules": [
+            { "scope": "keyword.control.group.ags", "settings": { "foreground": "#C586C0" } },
+            { "scope": "keyword.control.heading.ags", "settings": { "foreground": "#C586C0" } },
+            { "scope": "keyword.control.unit.ags", "settings": { "foreground": "#C586C0" } },
+            { "scope": "keyword.control.type.ags", "settings": { "foreground": "#C586C0" } },
+            { "scope": "keyword.control.data.ags", "settings": { "foreground": "#C586C0" } },
+            { "scope": "entity.name.class.ags", "settings": { "foreground": "#86EFAC" } },
+            { "scope": "variable.other.heading.ags", "settings": { "foreground": "#9CDCFE" } },
+            { "scope": "meta.unit.ags", "settings": { "foreground": "#FDBA74" } },
+            { "scope": "meta.type.ags", "settings": { "foreground": "#DCDCAA" } },
+            { "scope": "source.data.ags", "settings": { "foreground": "#D4D4D4" } }
+          ]
+        },
+        "[*Light*]": {
+          "textMateRules": [
+            { "scope": "keyword.control.group.ags", "settings": { "foreground": "#AF00DB" } },
+            { "scope": "keyword.control.heading.ags", "settings": { "foreground": "#AF00DB" } },
+            { "scope": "keyword.control.unit.ags", "settings": { "foreground": "#AF00DB" } },
+            { "scope": "keyword.control.type.ags", "settings": { "foreground": "#AF00DB" } },
+            { "scope": "keyword.control.data.ags", "settings": { "foreground": "#AF00DB" } },
+            { "scope": "entity.name.class.ags", "settings": { "foreground": "#15803D" } },
+            { "scope": "variable.other.heading.ags", "settings": { "foreground": "#0070C1" } },
+            { "scope": "meta.unit.ags", "settings": { "foreground": "#C2410C" } },
+            { "scope": "meta.type.ags", "settings": { "foreground": "#795E26" } },
+            { "scope": "source.data.ags", "settings": { "foreground": "#333333" } }
+          ]
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "typescript": "^5.3.0",
+    "@vscode/vsce": "^2.22.0"
+  }
+}
