@@ -2,6 +2,14 @@
 
 All notable changes to the "Diggy AGS" extension will be documented in this file.
 
+## [1.1.0] - 2026-02-17
+
+### Improved
+- **Distinct row colors**: Each row type now has its own color — GROUP (blue), HEADING (green), UNIT (orange), TYPE (pink), DATA (white keyword / orange values)
+- **Grey commas**: Comma separators are now a subtle grey across all row types
+- **Hover tooltips**: Cleaner format showing field name, description, unit/type metadata, and example values
+- Light theme colors updated to match the new scheme
+
 ## [1.0.0] - 2026-01-11
 
 ### Features
