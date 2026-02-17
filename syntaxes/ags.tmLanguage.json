@@ -4,39 +4,59 @@
   "scopeName": "source.ags",
   "patterns": [
     {
-      "match": "^(\"GROUP\")(.*)$",
-      "captures": {
-        "1": { "name": "keyword.control.group.ags" },
-        "2": { "name": "entity.name.class.ags" }
-      }
+      "begin": "^(\"GROUP\")",
+      "end": "$",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.group.ags" }
+      },
+      "contentName": "entity.name.class.ags",
+      "patterns": [
+        { "match": ",", "name": "punctuation.separator.comma.ags" }
+      ]
     },
     {
-      "match": "^(\"HEADING\")(.*)$",
-      "captures": {
-        "1": { "name": "keyword.control.heading.ags" },
-        "2": { "name": "variable.other.heading.ags" }
-      }
+      "begin": "^(\"HEADING\")",
+      "end": "$",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.heading.ags" }
+      },
+      "contentName": "variable.other.heading.ags",
+      "patterns": [
+        { "match": ",", "name": "punctuation.separator.comma.ags" }
+      ]
     },
     {
-      "match": "^(\"UNIT\")(.*)$",
-      "captures": {
-        "1": { "name": "keyword.control.unit.ags" },
-        "2": { "name": "meta.unit.ags" }
-      }
+      "begin": "^(\"UNIT\")",
+      "end": "$",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.unit.ags" }
+      },
+      "contentName": "meta.unit.ags",
+      "patterns": [
+        { "match": ",", "name": "punctuation.separator.comma.ags" }
+      ]
     },
     {
-      "match": "^(\"TYPE\")(.*)$",
-      "captures": {
-        "1": { "name": "keyword.control.type.ags" },
-        "2": { "name": "meta.type.ags" }
-      }
+      "begin": "^(\"TYPE\")",
+      "end": "$",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.type.ags" }
+      },
+      "contentName": "meta.type.ags",
+      "patterns": [
+        { "match": ",", "name": "punctuation.separator.comma.ags" }
+      ]
     },
     {
-      "match": "^(\"DATA\")(.*)$",
-      "captures": {
-        "1": { "name": "keyword.control.data.ags" },
-        "2": { "name": "source.data.ags" }
-      }
+      "begin": "^(\"DATA\")",
+      "end": "$",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.data.ags" }
+      },
+      "contentName": "source.data.ags",
+      "patterns": [
+        { "match": ",", "name": "punctuation.separator.comma.ags" }
+      ]
     },
     {
       "match": ".",

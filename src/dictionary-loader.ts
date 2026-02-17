@@ -4,7 +4,7 @@ import * as path from "path";
 interface LoadedDictionary {
   groups: Record<string, string>;
   headings: Record<string, string>;
-  headingDetails: Record<string, { description: string; type?: string; unit?: string; status?: string }>;
+  headingDetails: Record<string, { description: string; type?: string; unit?: string; status?: string; example?: string }>;
 }
 
 const dictionaryCache = new Map<string, LoadedDictionary>();
@@ -46,7 +46,7 @@ function loadDictionaryFromFile(filePath: string, cacheKey: string): LoadedDicti
 
     const groups: Record<string, string> = {};
     const headings: Record<string, string> = {};
-    const headingDetails: Record<string, { description: string; type?: string; unit?: string; status?: string }> = {};
+    const headingDetails: Record<string, { description: string; type?: string; unit?: string; status?: string; example?: string }> = {};
 
     // Find the DICT group which contains all definitions
     const dictGroup = data.find((g) => g.GROUP === "DICT");
@@ -61,6 +61,7 @@ function loadDictionaryFromFile(filePath: string, cacheKey: string): LoadedDicti
       const statIdx = headingRow.indexOf("DICT_STAT");
       const dtypIdx = headingRow.indexOf("DICT_DTYP");
       const unitIdx = headingRow.indexOf("DICT_UNIT");
+      const exmpIdx = headingRow.indexOf("DICT_EXMP");
 
       for (const row of dictGroup.DATA) {
         const dictType = row[typeIdx];
@@ -70,6 +71,7 @@ function loadDictionaryFromFile(filePath: string, cacheKey: string): LoadedDicti
         const status = row[statIdx] || "";
         const dataType = row[dtypIdx] || "";
         const unit = row[unitIdx] || "";
+        const example = exmpIdx >= 0 ? (row[exmpIdx] || "") : "";
 
         if (dictType === "GROUP") {
           groups[groupCode] = description;
@@ -80,6 +82,7 @@ function loadDictionaryFromFile(filePath: string, cacheKey: string): LoadedDicti
             type: dataType,
             unit,
             status,
+            example,
           };
         }
       }

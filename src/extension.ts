@@ -520,21 +520,29 @@ class AGSHoverProvider implements vscode.HoverProvider {
         if (group && group.headings.length >= columnIndex) {
           const headingName = group.headings[columnIndex - 1];
           const headingDetail = dict.headingDetails[headingName];
-          const description = headingDetail?.description || dict.headings[headingName] || "";
+          const description = dict.headings[headingName] || "";
 
           const markdown = new vscode.MarkdownString();
-          markdown.appendMarkdown(`**Column ${columnIndex}:** \`${headingName}\`\n\n`);
-          if (description) {
-            markdown.appendMarkdown(`${description}\n\n`);
+
+          // Line 1: field name - description
+          markdown.appendMarkdown(`\`${headingName}\` - ${description}\n\n`);
+
+          // Line 2: Unit and Type metadata
+          const metaParts: string[] = [];
+          if (headingDetail?.unit) {
+            metaParts.push(`Unit: ${headingDetail.unit}`);
           }
           if (headingDetail?.type) {
-            markdown.appendMarkdown(`**Type:** ${headingDetail.type}`);
-            if (headingDetail.unit) {
-              markdown.appendMarkdown(` | **Unit:** ${headingDetail.unit}`);
-            }
-            markdown.appendMarkdown(`\n\n`);
+            metaParts.push(`Type: ${headingDetail.type}`);
           }
-          markdown.appendMarkdown(`*Group: ${group.name}*`);
+          if (metaParts.length > 0) {
+            markdown.appendMarkdown(`${metaParts.join("  |  ")}\n\n`);
+          }
+
+          // Line 3: Example value if available
+          if (headingDetail?.example) {
+            markdown.appendMarkdown(`Example: ${headingDetail.example}`);
+          }
 
           return new vscode.Hover(markdown);
         }
@@ -561,19 +569,30 @@ class AGSHoverProvider implements vscode.HoverProvider {
     // Check if it's a heading name
     if (dict.headings[word]) {
       const headingDetail = dict.headingDetails[word];
+      const description = dict.headings[word] || "";
+
       const markdown = new vscode.MarkdownString();
-      markdown.appendMarkdown(`**${word}**\n\n`);
-      markdown.appendMarkdown(`${dict.headings[word]}\n\n`);
-      if (headingDetail?.type) {
-        markdown.appendMarkdown(`**Type:** ${headingDetail.type}`);
-        if (headingDetail.unit) {
-          markdown.appendMarkdown(` | **Unit:** ${headingDetail.unit}`);
-        }
-        if (headingDetail.status) {
-          markdown.appendMarkdown(` | **Status:** ${headingDetail.status}`);
-        }
-        markdown.appendMarkdown(`\n`);
+
+      // Line 1: field name - description
+      markdown.appendMarkdown(`\`${word}\` - ${description}\n\n`);
+
+      // Line 2: Unit and Type metadata
+      const metaParts: string[] = [];
+      if (headingDetail?.unit) {
+        metaParts.push(`Unit: ${headingDetail.unit}`);
       }
+      if (headingDetail?.type) {
+        metaParts.push(`Type: ${headingDetail.type}`);
+      }
+      if (metaParts.length > 0) {
+        markdown.appendMarkdown(`${metaParts.join("  |  ")}\n\n`);
+      }
+
+      // Line 3: Example value if available
+      if (headingDetail?.example) {
+        markdown.appendMarkdown(`Example: ${headingDetail.example}`);
+      }
+
       return new vscode.Hover(markdown, wordRange);
     }
 
